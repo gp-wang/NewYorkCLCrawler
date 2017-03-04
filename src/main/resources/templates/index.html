@@ -4,7 +4,7 @@
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
-        p.item-price{
+        input.search-keyword{
             display: inline-block;
         }
 
@@ -12,17 +12,41 @@
             display: inline-block;
         }
 
+        p.item-price{
+            display: inline-block;
+        }
+
     </style>
 </head>
 <body>
 
+<!--/*@thymesVar id="itemListCommand" type="com.gp.wang.web.ItemListCommand"*/-->
+<!--/*@thymesVar id="items" type="org.springframework.beans.support.PagedListHolder<com.gp.wang.domain.Item>"*/-->
+<form action="#" th:action="@{/items}" th:object="${itemListCommand}" method="post">
+    <fieldset class="search-controls">
+        <input class="search-keyword" type="text" th:field="*{keyword}" />
+        <button type="submit" name="search" >Search</button>
+    </fieldset>
 
-<ul class="items">
-    <li class="item" th:each="item : ${items}" >
-        <p class="item-title" th:text="${item.price != null ? item.title : 'No Title'}"></p>
-        <p class="item-price" th:if="${item.price != null}" th:text="'($' + ${item.price} + ')'"></p>
-    </li>
-</ul>
+    <fieldset class="content">
+        <ul class="items">
+            <li class="item" th:each="item : ${items.pageList}" >
+                <p class="item-title" th:text="${item.title != null ? item.title : 'No Title'}"></p>
+                <p class="item-price" th:if="${item.price != null}" th:text="'($' + ${item.price} + ')'"></p>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset class="pagination-controls">
+
+        <a th:if="${!items.firstPage}" th:href="@{/items(page='previous')}">Previous</a>
+        <span th:text="${ 'Page ' + (items.page + 1)}">1 / 10</span>
+        <a th:if="${!items.lastPage}" th:href="@{/items(page='next')}">Next</a>
+    </fieldset>
+</form>
+
+
+
 </body>
 
 </html>

@@ -67,7 +67,7 @@ public class CLItemReader extends AbstractHtmlItemReader {
                     itemRepository.save(item);
                     cnt ++;
                 } catch (Exception e) {
-                    LOGGER.warn("Could not save " + item.toString());
+                    LOGGER.info("Could not save " + item.toString());
                 }
 
 
