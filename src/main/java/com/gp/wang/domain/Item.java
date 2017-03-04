@@ -1,5 +1,7 @@
 package com.gp.wang.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "item", schema = "item_db")
+@Data
 public class Item implements Serializable{
 
     private static final long serialVersionUID = -9129154559271096509L;
@@ -16,10 +19,10 @@ public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "cl_id")
-    private Integer clId;
+    private Long clId;
 
     @Column(name = "price")
     private Double price;
@@ -56,5 +59,16 @@ public class Item implements Serializable{
         result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (lastModifiedTime != null ? lastModifiedTime.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", clId=" + clId +
+                ", price=" + price +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

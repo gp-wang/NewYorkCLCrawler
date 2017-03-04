@@ -3,9 +3,26 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        p.item-price{
+            display: inline-block;
+        }
+
+        p.item-title{
+            display: inline-block;
+        }
+
+    </style>
 </head>
 <body>
-<!--/*@thymesVar id="name" type="java.lang.String"*/-->
-    <p th:text="'Hello, ' + ${name} + '!'" />
+
+
+<ul class="items">
+    <li class="item" th:each="item : ${items}" >
+        <p class="item-title" th:text="${item.price != null ? item.title : 'No Title'}"></p>
+        <p class="item-price" th:if="${item.price != null}" th:text="'($' + ${item.price} + ')'"></p>
+    </li>
+</ul>
 </body>
+
 </html>
