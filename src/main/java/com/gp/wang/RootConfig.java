@@ -64,7 +64,7 @@ public class RootConfig {
     public SimpleTriggerFactoryBean clItemReaderJobTrigger() {
         final SimpleTriggerFactoryBean trigger = new SimpleTriggerFactoryBean();
         trigger.setJobDetail(clItemReaderJobDetail().getObject());
-        trigger.setRepeatInterval(10000); //longer time because it is selenium based.
+        trigger.setRepeatInterval(3600000); //longer time because it is selenium based.
         //trigger.setRepeatInterval(1000);
         return trigger;
     }
